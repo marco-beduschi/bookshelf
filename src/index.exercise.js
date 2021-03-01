@@ -4,8 +4,45 @@ import ReactDOM from 'react-dom'
 import {Dialog} from '@reach/dialog'
 import {Logo} from './components/logo'
 
+function LoginForm({onSubmit, buttonText}) {
+  function handleSubmit(event) {
+    event.preventDefault()
+    const {username, password} = event.target.elements
+
+    onSubmit({username: username.value, password: password.value})
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>
+          username:
+          <input type="text" name="username" />
+        </label>
+      </div>
+      <div>
+        <label>
+          password:
+          <input type="password" name="password" />
+        </label>
+      </div>
+      <div>
+        <input type="submit" value={buttonText} />
+      </div>
+    </form>
+  )
+}
+
 function App() {
   const [openModal, setOpenModal] = React.useState('none')
+
+  function login(formData) {
+    console.log('login', formData)
+  }
+
+  function register(formData) {
+    console.log('register', formData)
+  }
 
   return (
     <div>
@@ -22,12 +59,14 @@ function App() {
           <button onClick={() => setOpenModal('none')}>Close</button>
         </div>
         <h3>Login</h3>
+        <LoginForm onSubmit={login} buttonText="Login" />
       </Dialog>
       <Dialog aria-label="Registration form" isOpen={openModal === 'register'}>
         <div>
           <button onClick={() => setOpenModal('none')}>Close</button>
         </div>
         <h3>Register</h3>
+        <LoginForm onSubmit={register} buttonText="Sign Up" />
       </Dialog>
     </div>
   )
