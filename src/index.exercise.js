@@ -1,14 +1,7 @@
-// 🐨 make sure to add the comment and import jsx from @emotion/core
-// up here so you can use the css prop
 /** @jsx jsx */
 import {jsx} from '@emotion/core'
 
-// 🐨 let's get a solid reset of global styles so everything looks a bit better
-// In this project we're using bootstrap-reboot which you can import from
 import 'bootstrap/dist/css/bootstrap-reboot.css'
-// 🦉 Note: you can definitely use regular styles to style React apps
-// and using any modern toolchain will allow you to simply import the CSS file
-// but CSS-in-JS is generally easier to maintain.
 import '@reach/dialog/styles.css'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
@@ -27,25 +20,19 @@ function LoginForm({onSubmit, submitButton}) {
     })
   }
 
-  // 🐨 this <form> could use a css prop
-  // 🎨
-  //    display: 'flex',
-  //    flexDirection: 'column',
-  //    alignItems: 'stretch',
-  //    '> div': {
-  //      margin: '10px auto',
-  //      width: '100%',
-  //      maxWidth: '300px',
-  //    },
   return (
     <form
-      onSubmit={handleSubmit}
       css={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
-        '> div': {margin: '10px auto', width: '100%', maxWidth: '300px'},
+        '> div': {
+          margin: '10px auto',
+          width: '100%',
+          maxWidth: '300px',
+        },
       }}
+      onSubmit={handleSubmit}
     >
       <FormGroup>
         <label htmlFor="username">Username</label>
@@ -55,9 +42,7 @@ function LoginForm({onSubmit, submitButton}) {
         <label htmlFor="password">Password</label>
         <Input id="password" type="password" />
       </FormGroup>
-      <FormGroup>
-        {React.cloneElement(submitButton, {type: 'submit'})}
-      </FormGroup>
+      <div>{React.cloneElement(submitButton, {type: 'submit'})}</div>
     </form>
   )
 }
@@ -71,14 +56,6 @@ function App() {
     console.log('register', formData)
   }
 
-  // 🐨 this div could use a css prop to get its children rendered nicer
-  // 🎨
-  //    display: 'flex',
-  //    flexDirection: 'column',
-  //    alignItems: 'center',
-  //    justifyContent: 'center',
-  //    width: '100%',
-  //    height: '100vh',
   return (
     <div
       css={{
@@ -92,19 +69,11 @@ function App() {
     >
       <Logo width="80" height="80" />
       <h1>Bookshelf</h1>
-      {/*
-        🐨 the two buttons are too close, let's space them out
-          🎨 apply this to the div right below
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-            gridGap: '0.75rem',
-      */}
-      {/* 🐨 And make sure to use the new Button component for all these buttons */}
       <div
         css={{
           display: 'grid',
-          gridGap: '0.75rem',
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+          gridGap: '0.75rem',
         }}
       >
         <Modal>
